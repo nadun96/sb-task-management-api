@@ -45,8 +45,8 @@ public class User  implements UserDetails {
     }
 
     @JsonIgnore
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "team_id", referencedColumnName = "id",nullable = true)
+    @ManyToOne()
+    @JoinColumn(name = "team_id", referencedColumnName = "id")
     private Team team;
 
 

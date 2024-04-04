@@ -2,17 +2,14 @@ package com.nadun.tm.service;
 
 import com.nadun.tm.entity.Team;
 import com.nadun.tm.entity.User;
-import com.nadun.tm.repository.IUserRepository;
 import com.nadun.tm.repository.ITeamRepository;
+import com.nadun.tm.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
