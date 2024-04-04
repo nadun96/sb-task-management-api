@@ -1,13 +1,11 @@
 package com.nadun.tm.service;
 
-import com.nadun.tm.dto.TaskRequest;
-import com.nadun.tm.entity.Role;
+import com.nadun.tm.dao.request.TaskRequest;
 import com.nadun.tm.entity.Task;
 import com.nadun.tm.entity.TaskStatus;
 import com.nadun.tm.entity.User;
 import com.nadun.tm.repository.ITaskRepository;
 import com.nadun.tm.repository.IUserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;

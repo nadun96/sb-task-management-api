@@ -1,6 +1,6 @@
 package com.nadun.tm.controller;
 
-import com.nadun.tm.dto.TaskRequest;
+import com.nadun.tm.dao.request.TaskRequest;
 import com.nadun.tm.entity.Task;
 import com.nadun.tm.entity.TaskStatus;
 import com.nadun.tm.service.TaskService;

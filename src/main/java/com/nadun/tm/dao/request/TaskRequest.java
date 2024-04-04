@@ -1,4 +1,4 @@
-package com.nadun.tm.dto;
+package com.nadun.tm.dao.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
