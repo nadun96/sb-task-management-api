@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/task")
+@RequestMapping("/api/v1/task")
 public class TaskController {
 
     private final TaskService taskService;
@@ -26,7 +26,6 @@ public class TaskController {
         //@Params( title , description , assignedTo )
     }
 
-    //TODO: Fix Teams
     @GetMapping("/team/{teamId}")
     public List<Task> getMyTeamTasks(@PathVariable Long teamId) {
         return taskService.findTasksByTeamId(teamId);
@@ -45,6 +44,10 @@ public class TaskController {
     @PutMapping("/status")
     public Task updateTaskStatus(@RequestParam Long taskId, @RequestParam TaskStatus newStatus) {
         return taskService.updateTaskStatus(taskId, newStatus);
+    }
+    @DeleteMapping("/task/{taskId}")
+    public void deleteTask(@PathVariable Long taskId) {
+        taskService.deleteTaskById(taskId);
     }
 
 }

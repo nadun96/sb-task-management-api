@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/team")
+@RequestMapping("/api/v1/team")
 public class TeamController {
 
     private final TeamService teamService;

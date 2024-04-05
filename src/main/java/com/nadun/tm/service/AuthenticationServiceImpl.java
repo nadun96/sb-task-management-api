@@ -6,6 +6,7 @@ import com.nadun.tm.dao.response.JwtAuthenticationResponse;
 import com.nadun.tm.entity.Role;
 import com.nadun.tm.entity.User;
 import com.nadun.tm.repository.IUserRepository;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,11 +33,21 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
     }
 
     @Override
-    public JwtAuthenticationResponse signin(SigninRequest request) {
+    public JwtAuthenticationResponse signin(@NonNull SigninRequest request) {
+        System.out.println(request.getEmail());
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-        var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid email or password."));
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
+        var user = userRepository
+                .findByEmail(
+                        request.getEmail()
+                )
+                .orElseThrow(
+                        () -> new IllegalArgumentException("Invalid email or password.")
+                );
         var jwt = jwtService.generateToken(user);
         return JwtAuthenticationResponse.builder().token(jwt).build();
     }

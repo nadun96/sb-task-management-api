@@ -17,8 +17,10 @@ import java.util.function.Function;
 
 @Service
 public class JwtServiceImpl implements IJwtService {
+
     @Value("${token.signing.key}")
     private String jwtSigningKey;
+
     @Override
     public String extractUserName(String token) {
         return extractClaim(token, Claims::getSubject);
