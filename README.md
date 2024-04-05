@@ -1,3 +1,8 @@
+# A TASK MANGEMENT SYSTEM 
+### Technologies Used
+- Spring Boot
+- JWT Autthentication
+- Spring REST DATA Jpa
 # API Endpoints Reference Documentation
 ***
 ### Auth JWT
