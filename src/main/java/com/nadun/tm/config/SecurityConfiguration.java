@@ -27,28 +27,49 @@ import com.nadun.tm.service.UserService;
 public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserService userService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request
+//        http.csrf(AbstractHttpConfigurer::disable)
+//                .authorizeHttpRequests(request -> request
+//                        .requestMatchers("/api/v1/auth/**")
+//                        .permitAll()
+//                        .requestMatchers(
+//                                "/api/v1/team/**",
+//                                "/api/v1/user/**" ,
+//                                "/api/v1/task/**" ,
+//                                "/api/v1/resource"
+//                        )
+//                        .hasRole("LEADER")
+//                        .requestMatchers(
+//                                "/api/v1/task/user/{userId}",
+//                                "/api/v1/task/all",
+//                                "/api/v1/task/status").hasAnyRole("MEMBER", "LEADER")
+//                        .anyRequest()
+//                        .authenticated())
+//                .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
+//                .authenticationProvider(authenticationProvider()).addFilterBefore(
+//                        jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        http.authorizeHttpRequests(
+                request -> request
                         .requestMatchers("/api/v1/auth/**")
-                        .permitAll())
-                .authorizeHttpRequests(request -> request
-                        .requestMatchers(
-                                "/api/v1/team/**",
-                                "/api/v1/user/**" ,
-                                "/api/v1/task/**")
+                        .permitAll()
+                        .requestMatchers( "/api/v1/team/**",
+                "/api/v1/user/**" ,
+                "/api/v1/task/**" ,
+                "/api/v1/resource")
                         .hasRole("LEADER")
-                        .requestMatchers(
-                                "/api/v1/task/user/{userId}",
+                        .requestMatchers( "/api/v1/task/user/{userId}",
                                 "/api/v1/task/all",
                                 "/api/v1/task/status")
-                        .hasRole("MEMBER")
+                        .hasAnyRole("LEADER", "MEMBER")
                         .anyRequest()
-                        .authenticated())
-                .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
+                        .authenticated()
+        ).sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(
-                        jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                        jwtAuthenticationFilter,UsernamePasswordAuthenticationFilter.class
+                );
         return http.build();
     }
 
@@ -70,4 +91,5 @@ public class SecurityConfiguration {
             throws Exception {
         return config.getAuthenticationManager();
     }
+
 }

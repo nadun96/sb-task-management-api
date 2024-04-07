@@ -29,6 +29,7 @@ public class UserService implements IUserService{
 
     @Override
     public UserDetailsService userDetailsService() {
+        System.out.println("User Details Service Running");
         return username -> userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }

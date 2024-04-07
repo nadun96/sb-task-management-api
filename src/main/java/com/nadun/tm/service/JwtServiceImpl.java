@@ -33,12 +33,17 @@ public class JwtServiceImpl implements IJwtService {
 
     @Override
     public boolean isTokenValid(String token, UserDetails userDetails) {
+        System.out.println("Checking Validity");
         final String userName = extractUserName(token);
+//        System.out.println(userName);
+//        boolean validty = (userName.equals(userDetails.getUsername()))  && !isTokenExpired(token);
+//        System.out.println("user name and token is " + validty );
         return (userName.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolvers) {
         final Claims claims = extractAllClaims(token);
+        System.out.println("Claims are " + claims);
         return claimsResolvers.apply(claims);
     }
 

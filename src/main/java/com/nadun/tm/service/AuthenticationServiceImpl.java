@@ -22,7 +22,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
     private final AuthenticationManager authenticationManager;
     @Override
     public JwtAuthenticationResponse signup(SignUpRequest request) {
-        var user = User.builder().username(request.getUserName())
+        var user = User.builder().name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.MEMBER)
