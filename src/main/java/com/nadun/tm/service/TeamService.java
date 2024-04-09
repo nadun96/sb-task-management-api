@@ -10,6 +10,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TeamService {
 
@@ -44,7 +46,16 @@ public class TeamService {
         user.setRole(Role.LEADER);
         user.setTeam(newTeam);
         userRepository.save(user);
+    }
 
+    public void createTeam(String name){
+        Team team = new Team();
+        team.setName(name);
+        teamRepository.save(team);
+    }
+
+    public List<Team> getAllTeams() {
+        return teamRepository.findAll();
     }
 }
 

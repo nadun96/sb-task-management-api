@@ -35,9 +35,9 @@ public class JwtServiceImpl implements IJwtService {
     public boolean isTokenValid(String token, UserDetails userDetails) {
         System.out.println("Checking Validity");
         final String userName = extractUserName(token);
-//        System.out.println(userName);
-//        boolean validty = (userName.equals(userDetails.getUsername()))  && !isTokenExpired(token);
-//        System.out.println("user name and token is " + validty );
+        System.out.println(userName);
+        boolean validty = (userName.equals(userDetails.getUsername()))  && !isTokenExpired(token);
+        System.out.println("user name and token is " + validty );
         return (userName.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
@@ -50,7 +50,7 @@ public class JwtServiceImpl implements IJwtService {
     private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .setExpiration(new Date(System.currentTimeMillis() + (1000 * 60 * 120)))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
     }
 

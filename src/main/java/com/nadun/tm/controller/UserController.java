@@ -3,11 +3,11 @@ package com.nadun.tm.controller;
 import com.nadun.tm.entity.User;
 import com.nadun.tm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -21,8 +21,13 @@ public class UserController {
     }
 
     @PutMapping("/{userId}/team/{teamId}")
-    public ResponseEntity<User> assignTeamToUser(@PathVariable Long userId, @PathVariable Long teamId) {
-        User updatedUser = userService.assignTeamToUser(userId, teamId);
-        return ResponseEntity.ok(updatedUser);
+    public ResponseEntity<String> assignTeamToUser(@PathVariable Long userId, @PathVariable Long teamId) {
+        userService.assignTeamToUser(userId, teamId);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Team Assigned");
+    }
+
+    @GetMapping("/")
+    public List<User> getAllUsers(){
+        return userService.getAllUsers();
     }
 }

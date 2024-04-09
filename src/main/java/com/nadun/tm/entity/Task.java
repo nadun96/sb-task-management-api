@@ -29,7 +29,7 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private TaskStatus status = TaskStatus.PENDING;
 
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "assigned_to")
     private User assignedTo;
 

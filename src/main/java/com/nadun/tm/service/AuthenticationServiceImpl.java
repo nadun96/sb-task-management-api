@@ -34,7 +34,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 
     @Override
     public JwtAuthenticationResponse signin(@NonNull SigninRequest request) {
-        System.out.println(request.getEmail());
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),

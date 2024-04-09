@@ -2,14 +2,8 @@ package com.nadun.tm.entity;
 
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,9 +23,17 @@ public class Team {
     private String name;
 
     @OneToOne(optional = true)
-    @JoinColumn(name = "leader_id", referencedColumnName = "id",nullable = true)
+    @JsonIgnore
+    @JoinColumn(name = "leader_id", referencedColumnName = "id")
     private User leader;
 
-    @OneToMany(mappedBy = "team")
+
+    @OneToMany(mappedBy = "team", cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private List<User> members;
+
+    @Override
+    public String toString(){
+        return id.toString();
+    }
 }

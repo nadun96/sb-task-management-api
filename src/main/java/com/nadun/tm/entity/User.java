@@ -35,7 +35,7 @@ public class User  implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role = Role.MEMBER;
+    private Role role;
 
     @PrePersist
     public void setDefaultRole() {
@@ -44,15 +44,17 @@ public class User  implements UserDetails {
         }
     }
 
-    @JsonIgnore
+
     @ManyToOne()
+    @JsonIgnore
     @JoinColumn(name = "team_id", referencedColumnName = "id")
     private Team team;
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        String ROLE_PREFIX = "ROLE_";
+        return List.of(new SimpleGrantedAuthority(ROLE_PREFIX + role.name()));
     }
 
     @Override
@@ -78,5 +80,10 @@ public class User  implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString(){
+        return id.toString();
     }
 }

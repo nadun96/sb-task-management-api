@@ -20,10 +20,10 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @PostMapping("/")
+    @PostMapping()
     public ResponseEntity<Task> createTask(@RequestBody TaskRequest taskRequest) {
+        System.out.println("Task controller");
         return taskService.createTask(taskRequest);
-        //@Params( title , description , assignedTo )
     }
 
     @GetMapping("/team/{teamId}")
