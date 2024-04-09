@@ -11,12 +11,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService implements IUserService{
 
     private final IUserRepository userRepository;
     private final ITeamRepository ITeamRepository;
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 
     public User assignTeamToUser(Long userId, Long teamId) {
         User user = userRepository.findById(userId)
@@ -29,6 +35,7 @@ public class UserService implements IUserService{
 
     @Override
     public UserDetailsService userDetailsService() {
+        System.out.println("User Details Service Running");
         return username -> userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }

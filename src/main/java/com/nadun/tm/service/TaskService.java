@@ -40,9 +40,11 @@ public class TaskService {
             task.setAssignedTo(assignedTo);
             // Save task
             taskRepository.save(task);
-
+            System.out.println("Task service saved Task");
             return new ResponseEntity<>(task, HttpStatus.CREATED);
+
         }catch (InvalidDataAccessResourceUsageException e){
+            System.out.println("Task service exception");
             return new ResponseEntity<>(task, HttpStatus.BAD_REQUEST);
         }
 
