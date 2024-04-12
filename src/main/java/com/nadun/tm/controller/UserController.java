@@ -30,4 +30,9 @@ public class UserController {
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
+
+    @GetMapping("/team/{teamId}")
+    public List<User> getUsersOfTeam(@PathVariable Long teamId) {
+        return userService.getUsersByTeam(teamId);
+    }
 }
